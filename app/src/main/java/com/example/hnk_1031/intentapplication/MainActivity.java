@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode,resultCode,intent);
 
-        if (requestCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE_GALLERY) {
 
                 try {
@@ -81,13 +82,15 @@ public class MainActivity extends AppCompatActivity {
                     inputStream.close();
                     imageView.setImageBitmap(bmp);
 
+
                 } catch (Exception e) {
 
                     Toast.makeText(MainActivity.this,"エラー",Toast.LENGTH_LONG).show();
                 }
             } else if (requestCode == REQUEST_CODE_CAMERA) {
-                Bitmap bpm =(Bitmap) intent.getExtras().get("data");
-                imageView.setImageBitmap(bpm);
+                Bitmap bmp =(Bitmap) intent.getExtras().get("data");
+                imageView.setImageBitmap(bmp);
+                Log.e("TAG","TAG");
 
             }
         } else if (resultCode == RESULT_CANCELED) {
